@@ -76,7 +76,8 @@ sdkman {
 githubRelease {
     releaseAssets = files(distZip.destinationDirectory)
     token = project.githubToken
-    owner = 'sshoogr'
+    owner = 'aalmiray'
+    repo = 'gplayground'
     draft = true
     body = '## News'
 }
