@@ -28,15 +28,15 @@ jobs:
       - name: Publish sshoogr-parent
         uses: eskatos/gradle-command-action@v1
         with:
+            build-root-directory: ./sshoogr-parent
             arguments: publishToMavenLocal
             wrapper-cache-enabled: true
             dependencies-cache-enabled: true
-            build-root-directory: ./sshoogr-parent
 
       - name: Build sshoogr
         uses: eskatos/gradle-command-action@v1
         with:
+            build-root-directory: .
             arguments: build
             wrapper-cache-enabled: true
             dependencies-cache-enabled: true
-            build-root-directory: .
