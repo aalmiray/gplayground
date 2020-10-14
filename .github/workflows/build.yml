@@ -41,18 +41,14 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradlew-
 
-      - name: Grant execute permission to gradlew (1)
-        run: chmod +x gradlew
-        working-directory: ./sshoogr-parent
-
-      - name: Grant execute permission to gradlew (2)
-        run: chmod +x gradlew
-        working-directory: ./main
-
       - name: Publish sshoogr-parent
-        run: ./gradlew publishToMavenLocal
         working-directory: ./sshoogr-parent
+        run: |
+          chmod +x gradlew
+          ./gradlew publishToMavenLocal
 
       - name: Build sshoogr
-        run: ./gradlew build
         working-directory: ./main
+        run:  |
+          chmod +x gradlew
+          ./gradlew build
