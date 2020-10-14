@@ -74,7 +74,7 @@ sdkman {
 }
 
 githubRelease {
-    releaseAssets = files(distZip.destinationDirectory)
+    releaseAssets = files(distZip.destinationDir.listFiles())
     token = project.githubToken
     targetCommitish = 'main'
     overwrite = true
