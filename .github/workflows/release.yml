@@ -52,4 +52,4 @@ jobs:
         working-directory: ./main
         run: |
           chmod +x gradlew
-          ./gradlew assembleDist githubRelease
+          ./gradlew assembleDist githubRelease -PgithubToken=${{ secrets.GITHUB_TOKEN }}
