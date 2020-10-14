@@ -1,0 +1,77 @@
+/*
+ * Copyright (C) 2011-2020 Aestas/IT
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+buildscript {
+    repositories {
+        gradlePluginPortal()
+        jcenter()
+        mavenLocal()
+    }
+    dependencies {
+        classpath "com.aestasit.sshoogr.gradle:sshoogr-parentbuild:$sshoogrBuildVersion"
+        classpath "com.github.breadmoirai:github-release:$releasePluginVersion"
+        classpath "org.ajoberstar:gradle-git-publish:$gitPluginVersion"
+        classpath "org.kordamp.gradle:groovy-project-gradle-plugin:$kordampPluginVersion"
+        classpath "org.kordamp.gradle:integrationtest-gradle-plugin:$kordampPluginVersion"
+        classpath "org.kordamp.gradle:guide-gradle-plugin:$kordampPluginVersion"
+        classpath "org.kordamp.gradle:sonar-gradle-plugin:$kordampPluginVersion"
+        classpath "io.sdkman:gradle-sdkvendor-plugin:$sdkmanPluginVersion"
+        classpath "gradle.plugin.org.gradle.crypto:checksum:$checksumPluginVersion"
+    }
+}
+apply plugin: 'com.aestasit.sshoogr.gradle.sshoogr-parentbuild'
+
+rootProject.name = 'sshoogr'
+
+projects {
+    plugins {
+        all {
+            id 'idea'
+        }
+        path(':') {
+            id 'org.kordamp.gradle.groovy-project'
+            id 'org.kordamp.gradle.bintray'
+        }
+        path(':guide') {
+            id 'org.kordamp.gradle.guide'
+            id 'org.ajoberstar.git-publish'
+        }
+        dir('subprojects') {
+            id 'java-library'
+            id 'groovy'
+            id 'application'
+            id 'org.kordamp.gradle.codenarc'
+            id 'org.kordamp.gradle.sonar'
+            id 'org.kordamp.gradle.integration-test'
+            id 'io.sdkman.vendors'
+            id 'org.gradle.crypto.checksum'
+            id 'com.github.breadmoirai.github-release'
+        }
+    }
+}
+
+enforce {
+    rule(enforcer.rules.BanDuplicateClasses) { r ->
+        r.enabled = false
+    }
+    rule(enforcer.rules.ForceDependencies) { r ->
+        r.dependencies.addAll "org.slf4j:slf4j-api:${slf4jVersion}",
+            "org.slf4j:jcl-over-slf4j:${slf4jVersion}",
+            "commons-io:commons-io:${commonsIOVersion}",
+            "com.jcraft:jsch:${jschVersion}",
+            "junit:junit:${junitVersion}"
+    }
+}

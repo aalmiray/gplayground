@@ -1,0 +1,16 @@
+=== Installing `sshoogr`
+
+TODO: write this section
+
+==== Installing `sshoogr` with SDKMAN!
+
+The simplest way to use `sshoogr` from the command line is by using http://sdkman.io.
+
+If SDKMAN is not yet installed, open a terminal and enter the following:
+
+`$ curl -s get.sdkman.io | bash`
+
+Follow the instructions presented in the terminal, then enter the following command:
+
+`$ sdk install sshoogr`
+

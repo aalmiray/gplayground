@@ -1,0 +1,32 @@
+=== Releasing `sshoogr`
+
+TODO: write this section
+
+==== Clean build and commit all changes
+
+`gradlew formatLicense`
+
+`gradlew clean build`
+
+
+==== Integration test
+
+`vagrant up`
+
+`gradlew clean integration`
+
+
+==== Release snapshot
+
+`gradlew clean uploadArchives`
+
+
+==== Publishing to Maven Central
+
+`gradlew release`
+
+`gradlew closeAndPromoteRepository`
+
+`gradlew sdkMajorRelease`
+
+
