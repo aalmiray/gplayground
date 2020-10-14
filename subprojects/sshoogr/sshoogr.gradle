@@ -74,7 +74,7 @@ sdkman {
 }
 
 githubRelease {
-    releaseAssets = files(distZip.destinationDirectory.asFile.get().listFiles())
+    releaseAssets = files(distZip.destinationDirectory)
     token = project.githubToken
     owner = 'sshoogr'
     draft = true
