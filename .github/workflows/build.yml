@@ -41,14 +41,18 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradlew-
 
-      - name: Publish sshoogr-parent
-        uses: eskatos/gradle-command-action@v1
+      - name: Grant execute permission to gradlew (1)
+        run: chmod +x gradlew
         working-directory: ./sshoogr-parent
-        with:
-          arguments: publishToMavenLocal
+
+      - name: Grant execute permission to gradlew (2)
+        run: chmod +x gradlew
+        working-directory: ./main
+
+      - name: Publish sshoogr-parent
+        run: ./gradlew publishToMavenLocal
+        working-directory: ./sshoogr-parent
 
       - name: Build sshoogr
-        uses: eskatos/gradle-command-action@v1
+        run: ./gradlew build
         working-directory: ./main
-        with:
-          arguments: build
