@@ -57,7 +57,7 @@ dependencies {
 
 task createChecksum(type: Checksum) {
     dependsOn(assembleDist)
-    files = files([distZip, distTar].outputs.files.flatten())
+    files = distZip.destinationDirectory.asFileTree
     outputDir = distZip.destinationDirectory.asFile.get()
     algorithm = Checksum.Algorithm.SHA256
 }
@@ -74,14 +74,14 @@ sdkman {
 }
 
 githubRelease {
-    releaseAssets = files(distZip.destinationDir.listFiles())
+    releaseAssets = distZip.destinationDirectory.asFileTree
     token = project.githubToken
     targetCommitish = 'main'
     overwrite = true
     owner = 'aalmiray'
     repo = 'gplayground'
-    draft = true
-    body = '## News'
+    draft = false
+    body = changelog()
 }
 
 license {
