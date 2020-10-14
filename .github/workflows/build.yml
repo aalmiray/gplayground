@@ -42,16 +42,13 @@ jobs:
             ${{ runner.os }}-gradlew-
 
       - name: Publish sshoogr-parent
-        working-directory: ./sshoogr-parent
-        run: |
-          pwd
-          ls -l
-          ls ..
-          chmod +x gradlew
-          ./gradlew publishToMavenLocal
+        uses: eskatos/gradle-command-action@v1
+        with:
+            arguments: publishToMavenLocal
+            build-root-directory: ./sshoogr-parent
 
       - name: Build sshoogr
-        working-directory: ./main
-        run:  |
-          chmod +x gradlew
-          ./gradlew build
+        uses: eskatos/gradle-command-action@v1
+        with:
+            arguments: build
+            build-root-directory: .
