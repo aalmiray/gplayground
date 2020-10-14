@@ -48,7 +48,5 @@ jobs:
       - name: Build sshoogr
         working-directory: ./main
         run: |
-          pwd
-          ls
           chmod +x gradlew
           ./gradlew build
