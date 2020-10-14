@@ -44,6 +44,9 @@ jobs:
       - name: Publish sshoogr-parent
         working-directory: ./sshoogr-parent
         run: |
+          pwd
+          ls -l
+          ls ..
           chmod +x gradlew
           ./gradlew publishToMavenLocal
 
