@@ -43,12 +43,12 @@ jobs:
 
       - name: Publish sshoogr-parent
         uses: eskatos/gradle-command-action@v1
+        working-directory: ./sshoogr-parent
         with:
           arguments: publishToMavenLocal
-          path: ./sshoogr-parent
 
       - name: Build sshoogr
         uses: eskatos/gradle-command-action@v1
+        working-directory: ./main
         with:
-          arguments: build -S
-          path: ./main
+          arguments: build
