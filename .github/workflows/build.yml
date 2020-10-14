@@ -25,18 +25,32 @@ jobs:
         with:
           java-version: 1.8
 
-      - name: Publish sshoogr-parent
-        uses: eskatos/gradle-command-action@v1
+      - uses: actions/cache@v1
         with:
-            build-root-directory: ./sshoogr-parent
-            arguments: publishToMavenLocal
-            wrapper-cache-enabled: true
-            dependencies-cache-enabled: true
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-cache-${{ hashFiles('**/*.gradle') }}-${{ hashFiles('**/gradle.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
+
+      - uses: actions/cache@v1
+        with:
+          path: ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-wrapper-${{ hashFiles('**/gradlew') }}
+          restore-keys: |
+            ${{ runner.os }}-gradlew-
+
+      - name: Publish sshoogr-parent
+        working-directory: ./sshoogr-parent
+        run: |
+          pwd
+          ls
+          chmod +x gradlew
+          ./gradlew publishToMavenLocal
 
       - name: Build sshoogr
-        uses: eskatos/gradle-command-action@v1
-        with:
-            build-root-directory: .
-            arguments: build
-            wrapper-cache-enabled: true
-            dependencies-cache-enabled: true
+        working-directory: ./main
+        run: |
+          pwd
+          ls
+          chmod +x gradlew
+          ./gradlew build
